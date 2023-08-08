@@ -15,6 +15,7 @@ import { ButtonSIWELogin } from '@/integrations/siwe/components/button-siwe-logi
 import { ButtonSIWELogout } from '@/integrations/siwe/components/button-siwe-logout'
 import { IsSignedIn } from '@/integrations/siwe/components/is-signed-in'
 import { IsSignedOut } from '@/integrations/siwe/components/is-signed-out'
+import { ButtonSSXLogin } from '@/integrations/sprucekit/components/button-ssx-login'
 
 export default function PageIntegration() {
   return (
@@ -60,7 +61,7 @@ export default function PageIntegration() {
             <ButtonSIWELogout className="btn btn-blue btn-lg " />
           </IsSignedIn>
           <IsSignedOut>
-            <ButtonSIWELogin className="btn btn-pill btn-emerald btn-lg min-h-[70px] min-w-[200px] text-xl" />
+            <ButtonSSXLogin className="btn btn-pill btn-emerald btn-lg min-h-[70px] min-w-[200px] text-xl" />
           </IsSignedOut>
         </IsWalletConnected>
         <IsWalletDisconnected>

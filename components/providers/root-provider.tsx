@@ -8,6 +8,7 @@ import { Provider as RWBProvider } from 'react-wrap-balancer'
 
 import HandleWalletEvents from '@/components/blockchain/handle-wallet-events'
 import { RainbowKit } from '@/components/providers/rainbow-kit'
+import { SSXProvider } from '@/components/providers/ssx-provider'
 import { useIsMounted } from '@/lib/hooks/use-is-mounted'
 
 const queryClient = new QueryClient()
@@ -22,7 +23,9 @@ export default function RootProvider({ children }: RootProviderProps) {
       <QueryClientProvider client={queryClient}>
         <RWBProvider>
           <RainbowKit>
-            <HandleWalletEvents>{children}</HandleWalletEvents>
+            <SSXProvider>
+              <HandleWalletEvents>{children}</HandleWalletEvents>
+            </SSXProvider>
           </RainbowKit>
         </RWBProvider>
       </QueryClientProvider>

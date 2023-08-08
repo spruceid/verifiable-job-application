@@ -115,3 +115,15 @@ body {
     transform: rotate(360deg);
   }
 }
+
+/* .credentials-card {
+  @apply grid gap-4 w-full;
+}
+
+.credentials-card-inner {
+  @apply bg-card border-2 dark:border-neutral-700 rounded-lg p-6 shadow-sm;
+}
+
+.credentials-card-inner:hover {
+  @apply bg-card-with-hover;
+} */
