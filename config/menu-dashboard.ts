@@ -10,4 +10,8 @@ export const menuDashboard = [
     label: 'Credentials',
     href: '/application/credentials',
   },
+  {
+    label: 'Submit',
+    href: '/application/submit',
+  },
 ]

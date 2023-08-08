@@ -1,4 +1,6 @@
 'use client'
+import { useState } from 'react'
+
 import { motion } from 'framer-motion'
 
 import { WalletAddress } from '@/components/blockchain/wallet-address'
@@ -9,6 +11,12 @@ import { IsWalletDisconnected } from '@/components/shared/is-wallet-disconnected
 import { FADE_DOWN_ANIMATION_VARIANTS } from '@/config/design'
 
 export default function PageDashboardAccount() {
+  const [jsonText, setJsonText] = useState('')
+
+  const handleGenerateClick = () => {
+    // handle the submit event here
+  }
+
   return (
     <motion.div
       animate="show"
@@ -19,7 +27,7 @@ export default function PageDashboardAccount() {
       whileInView="show">
       <IsWalletConnected>
         <div className="card w-[420px]">
-          <h3 className="text-2xl font-normal">Account</h3>
+          <h3 className="text-2xl font-normal">Submit</h3>
           <hr className="my-3 dark:opacity-30" />
           <div className="mt-3">
             <span className="mr-1 font-bold">Address:</span> <WalletAddress truncate />
@@ -31,6 +39,19 @@ export default function PageDashboardAccount() {
             <span className="mr-1 font-bold">Nonce:</span> <WalletNonce />
           </div>
           <hr className="my-3 dark:opacity-30" />
+
+          <div className="mt-3 flex items-center">
+            <input checked disabled className="mr-2" type="checkbox" />
+            <span className="mr-1 font-bold">Application</span>
+          </div>
+          <div className="mt-3 flex items-center">
+            <input checked disabled className="mr-2" type="checkbox" />
+            <span className="mr-1 font-bold">Credentials</span>
+          </div>
+          <button className="btn btn-primary mt-3" onClick={handleGenerateClick}>
+            Generate Submission
+          </button>
+          <textarea readOnly className="mt-3 h-48 w-full bg-gray-200 text-black" value={jsonText}></textarea>
         </div>
       </IsWalletConnected>
       <IsWalletDisconnected>
