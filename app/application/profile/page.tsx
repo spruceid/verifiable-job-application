@@ -21,10 +21,7 @@ const initialProfile = {
 const PageDashboardAccount = () => {
   const [profile, setProfile] = useState(initialProfile)
 
-  // Updating the page based on the changes in profile object
   useEffect(() => {
-    // Fetch data and setProfile here
-    // By default, it is setting to initial values.
     setProfile(initialProfile)
   }, [])
 
@@ -54,20 +51,30 @@ const PageDashboardAccount = () => {
     }))
   }
 
+  const deleteEmployment = (indexToRemove) => {
+    if (window.confirm('Are you sure you want to delete this Employment History?')) {
+      setProfile((prevProfile) => ({
+        ...prevProfile,
+        employmentHistory: prevProfile.employmentHistory.filter((_, index) => index !== indexToRemove),
+      }))
+    }
+  }
+
   return (
     <IsWalletConnected>
       <motion.div
         animate="show"
-        className="flex h-full w-full items-center justify-center"
+        className="flex h-screen w-full items-center justify-center p-4"
         initial="hidden"
         variants={FADE_DOWN_ANIMATION_VARIANTS}
         viewport={{ once: true }}
         whileInView="show">
-        <div className="card w-[420px] rounded-lg p-6">
-          <h3 className="text-2xl font-normal">Profile</h3>
+        <div className="card max-w-full rounded-lg p-6">
+          <h3 className="text-2xl font-normal dark:text-white">Profile</h3>
           <hr className="my-3 dark:opacity-30" />
           <form onSubmit={handleSubmit}>
             <div className="mt-3">
+              <h3 className="my-2 text-xl font-semibold dark:text-white">Basic Info</h3>
               <label>Name</label>
               <input
                 className="input"
@@ -101,12 +108,19 @@ const PageDashboardAccount = () => {
               />
             </div>
             <div className="mt-3">
-              <label>Skills and Qualifications:</label>
+              <h3 className="my-2 text-xl font-semibold dark:text-white">Skills and Qualifications:</h3>
               <textarea className="input" name="skills" value={profile.skills} onChange={(e) => handleFieldChange('skills', null, e.target.value)} />
             </div>
             <div className="mt-3">
+              <h3 className="my-2 text-xl font-semibold dark:text-white">Employment History</h3>
               {profile.employmentHistory.map((employment, index) => (
-                <div key={index}>
+                <div key={index} className="px-8 py-4">
+                  <h3 className="my-2 text-xl font-semibold dark:text-white">
+                    Employer {index + 1}
+                    <button className="btn btn-sm btn-red ml-4 py-1 px-2" type="button" onClick={() => deleteEmployment(index)}>
+                      Delete
+                    </button>
+                  </h3>
                   <label>Company: </label>
                   <input
                     className="input"
@@ -151,7 +165,7 @@ const PageDashboardAccount = () => {
                 </div>
               ))}
               <button className="btn btn-primary mt-3" type="button" onClick={addEmployment}>
-                Add another employment history
+                Add employment history
               </button>
             </div>
             <button className="btn btn-primary mt-5" type="submit">
@@ -161,7 +175,7 @@ const PageDashboardAccount = () => {
         </div>
       </motion.div>
       <IsWalletDisconnected>
-        <h3 className="text-lg font-normal">Connect Wallet to view your personalized dashboard.</h3>
+        <h3 className="text-lg font-normal dark:text-white">Connect Wallet to view your personalized dashboard.</h3>
       </IsWalletDisconnected>
     </IsWalletConnected>
   )
