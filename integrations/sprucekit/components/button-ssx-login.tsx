@@ -3,6 +3,7 @@
 import { HTMLAttributes } from 'react'
 
 import { useSSX } from '@spruceid/ssx-react'
+import { useRouter } from 'next/navigation'
 import { useAccount, useNetwork, useSignMessage } from 'wagmi'
 
 import { cn } from '@/lib/utils'
@@ -17,14 +18,14 @@ export const ButtonSSXLogin = ({ className, label = 'Sign-In With Ethereum', dis
   const { address } = useAccount()
   const { chain } = useNetwork()
   const { ssx } = useSSX()
+  const Router = useRouter()
 
   const handleCreateMessage = async () => {
     try {
       if (!address || !chain?.id) return
       const session = await ssx?.signIn()
       if (session) {
-        // logged in
-        dispatchEvent(new Event('verified'))
+        Router.push('/application')
       }
     } catch (error) {
       console.error(error)

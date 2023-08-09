@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 
+import { useSSX } from '@spruceid/ssx-react'
 import { motion } from 'framer-motion'
 
 import { WalletAddress } from '@/components/blockchain/wallet-address'
@@ -11,6 +12,8 @@ import { IsWalletDisconnected } from '@/components/shared/is-wallet-disconnected
 import { FADE_DOWN_ANIMATION_VARIANTS } from '@/config/design'
 
 export default function PageDashboardAccount() {
+  const { ssx } = useSSX()
+
   const [jsonText, setJsonText] = useState('')
 
   const handleGenerateClick = () => {
@@ -30,13 +33,7 @@ export default function PageDashboardAccount() {
           <h3 className="text-2xl font-normal">Submit</h3>
           <hr className="my-3 dark:opacity-30" />
           <div className="mt-3">
-            <span className="mr-1 font-bold">Address:</span> <WalletAddress truncate />
-          </div>
-          <div className="mt-3">
-            <span className="mr-1 font-bold">Balance:</span> <WalletBalance />
-          </div>
-          <div className="mt-3">
-            <span className="mr-1 font-bold">Nonce:</span> <WalletNonce />
+            <span className="mr-1 font-bold">Address:</span> {ssx?.session?.ens?.domain || ssx?.address()}
           </div>
           <hr className="my-3 dark:opacity-30" />
 

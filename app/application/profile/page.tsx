@@ -1,29 +1,19 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 
+import { useSSX } from '@spruceid/ssx-react'
 import { motion } from 'framer-motion'
 
 import { IsWalletConnected } from '@/components/shared/is-wallet-connected'
 import { IsWalletDisconnected } from '@/components/shared/is-wallet-disconnected'
 import { FADE_DOWN_ANIMATION_VARIANTS } from '@/config/design'
 
-const initialProfile = {
-  basicInfo: {
-    name: '',
-    address: '',
-    phone: '',
-    email: '',
-  },
-  skills: '',
-  employmentHistory: [],
-}
+import { useApp } from '../app_context'
 
 const PageDashboardAccount = () => {
-  const [profile, setProfile] = useState(initialProfile)
-
-  useEffect(() => {
-    setProfile(initialProfile)
-  }, [])
+  const { ssx } = useSSX()
+  const { profile: currentProfile } = useApp()
+  const [profile, setProfile] = useState(currentProfile)
 
   const handleFieldChange = (section, field, value, index = undefined) => {
     if (index !== undefined) {
@@ -37,11 +27,11 @@ const PageDashboardAccount = () => {
     }
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     e.preventDefault()
     console.log(profile)
-    // Here you can handle the submission of the form, i.e., updating the profile
-    // You can make a POST request through Axios or Fetch API
+    await ssx?.storage.put('profile', profile)
   }
 
   const addEmployment = () => {
@@ -109,7 +99,12 @@ const PageDashboardAccount = () => {
             </div>
             <div className="mt-3">
               <h3 className="my-2 text-xl font-semibold dark:text-white">Skills and Qualifications:</h3>
-              <textarea className="input" name="skills" value={profile.skills} onChange={(e) => handleFieldChange('skills', null, e.target.value)} />
+              <textarea
+                className="input"
+                name="skills"
+                value={profile.skills.description}
+                onChange={(e) => handleFieldChange('skills', 'description', e.target.value)}
+              />
             </div>
             <div className="mt-3">
               <h3 className="my-2 text-xl font-semibold dark:text-white">Employment History</h3>

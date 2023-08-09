@@ -19,10 +19,10 @@ interface SiteConfig {
 export const SITE_CANONICAL = 'https://turboeth.xyz'
 
 export const siteConfig: SiteConfig = {
-  name: 'TurboETH',
-  title: 'TurboETH - Web3 App Template',
+  name: 'Verifiable Job Application',
+  title: 'Verifiable Job Application: Own your data, get hired faster',
   emoji: '⚡',
-  description: 'Web3 App Template built using Next.js, RainbowKit, SIWE, Disco, and more!',
+  description: 'Store your job application data and credentials using SpruceKit and TurboETH.',
   previewImg: `${SITE_CANONICAL}/preview.png`,
   localeDefault: 'en',
   links: {

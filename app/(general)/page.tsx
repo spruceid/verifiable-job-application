@@ -11,11 +11,10 @@ import { IsWalletDisconnected } from '@/components/shared/is-wallet-disconnected
 import { LinkComponent } from '@/components/shared/link-component'
 import { FADE_DOWN_ANIMATION_VARIANTS } from '@/config/design'
 import { turboIntegrations } from '@/data/turbo-integrations'
-import { ButtonSIWELogin } from '@/integrations/siwe/components/button-siwe-login'
-import { ButtonSIWELogout } from '@/integrations/siwe/components/button-siwe-logout'
-import { IsSignedIn } from '@/integrations/siwe/components/is-signed-in'
-import { IsSignedOut } from '@/integrations/siwe/components/is-signed-out'
 import { ButtonSSXLogin } from '@/integrations/sprucekit/components/button-ssx-login'
+import { ButtonSSXLogout } from '@/integrations/sprucekit/components/button-ssx-logout'
+import { IsSignedIn } from '@/integrations/sprucekit/components/is-signed-in'
+import { IsSignedOut } from '@/integrations/sprucekit/components/is-signed-out'
 
 export default function PageIntegration() {
   return (
@@ -58,7 +57,7 @@ export default function PageIntegration() {
       <div className="container mx-auto mt-10  max-w-screen-xl gap-6 text-center">
         <IsWalletConnected>
           <IsSignedIn>
-            <ButtonSIWELogout className="btn btn-blue btn-lg " />
+            <ButtonSSXLogout className="btn btn-blue btn-lg " />
           </IsSignedIn>
           <IsSignedOut>
             <ButtonSSXLogin className="btn btn-pill btn-emerald btn-lg min-h-[70px] min-w-[200px] text-xl" />
